@@ -1,9 +1,9 @@
 import { jest, describe, it, expect, beforeEach } from '@jest/globals';
-import { CheckoutService } from '../services/checkoutService.js';
-import { hubtelClient } from '../services/hubtelClient.js';
+import { CheckoutService } from '../src/services/checkoutService.js';
+import { hubtelClient } from '../src/services/hubtelClient.js';
 
 // Mocking axios instance
-jest.mock('../services/hubtelClient.js', () => ({
+jest.mock('../src/services/hubtelClient.js', () => ({
   hubtelClient: {
     post: jest.fn(() => Promise.resolve({
       data: {
