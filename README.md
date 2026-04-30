@@ -41,6 +41,23 @@ Copy `.env.example` to `.env` and fill in the following:
 
 - `POST /api/v1/callback`: Hubtel's callback entry point (proxies to QStash).
 - `POST /api/v1/callback/process`: QStash's retryable endpoint for business logic.
+- `GET /health`: Lightweight health check (returns 200 OK).
+
+## QStash Health Check Schedule
+
+To keep the service warm and monitor availability, you can schedule a periodic health check via QStash.
+
+### Create Schedule via cURL
+
+```bash
+curl -XPOST \
+    -H "Authorization: Bearer <YOUR_QSTASH_TOKEN>" \
+    -H "Upstash-Cron: */14 * * * *" \
+    -H "Upstash-Method: GET" \
+    "https://qstash.upstash.io/v2/schedules/https://eltes.onrender.com/health"
+```
+
+A helper script is provided in `scripts/setup-qstash.sh`.
 
 ## Running the App
 

@@ -12,14 +12,7 @@ const envSchema = z.object({
   QSTASH_TOKEN: z.string(),
   QSTASH_CURRENT_SIGNING_KEY: z.string(),
   QSTASH_NEXT_SIGNING_KEY: z.string(),
-  APP_BASE_URL: z.string(), // Used for callbacks
+  APP_BASE_URL: z.string(),
 });
 
-const parsed = envSchema.safeParse(process.env);
-
-if (!parsed.success) {
-  console.error('❌ Invalid environment variables:', JSON.stringify(parsed.error.format(), null, 2));
-  process.exit(1);
-}
-
-export const config = parsed.data;
+export const config = envSchema.parse(process.env);
