@@ -13,7 +13,6 @@ export default {
       },
     ],
   },
-  transformIgnorePatterns: [
-    'node_modules/(?!(uuid)/)',
-  ],
+  roots: ['<rootDir>/tests'],
+  testPathIgnorePatterns: ['/node_modules/', '/dist/'],
 };
