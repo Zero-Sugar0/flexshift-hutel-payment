@@ -11,7 +11,11 @@ const app = express();
 
 app.set('trust proxy', true);
 app.use(cors());
-app.use(express.json());
+app.use(express.json({
+  verify: (req: any, _res, buf) => {
+    req.rawBody = buf;
+  }
+}));
 
 // Health check
 app.get('/health', (req, res) => {

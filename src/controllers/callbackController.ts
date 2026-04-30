@@ -42,7 +42,7 @@ export class CallbackController {
   static async processCallback(req: Request, res: Response, next: NextFunction) {
     try {
       const signature = req.headers['upstash-signature'] as string;
-      const body = JSON.stringify(req.body);
+      const body = (req as any).rawBody?.toString('utf-8') || JSON.stringify(req.body);
 
       // Verify QStash signature
       const isValid = await receiver.verify({
